@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-center align-items-center">
+    <h1 class="my-3">Tv Shows!</h1>
+</div>
+
+<!-- <div class="d-flex justify-content-end my-3 px-2">
+    
+    <button type="button" class="btn btn-success">Add new ShowTv!</button>
+</div> -->
+<div class="card-body my-5">
+    <form (ngSubmit)="onSubmit()" #tvShowForm="ngForm">
+        <div class="form-group mb-3">
+            <label for="name">Nombre del programa de televisión</label>
+            <input type="text" id="name" name="name" class="form-control" required [(ngModel)]="tvShow.name">
+        </div>
+        <div class="form-group form-check mb-3">
+            <input type="checkbox" id="favorite" name="favorite" class="form-check-input" [(ngModel)]="tvShow.favorite">
+            <label for="favorite" class="form-check-label">¿Es de tus favoritos?</label>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!tvShowForm.form.valid">Agregar</button>
+    </form>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-3">
+    <div class="col" *ngFor="let tvShow of tvShows">
+        <div class="border rounded-3 p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3 class="mb-0">{{ tvShow.name }}</h3>
+                <i *ngIf="tvShow.favorite" class="bi bi-bookmark-star-fill text-warning"
+                    (click)="removeFavorite(tvShow.name)"></i>
+                <i *ngIf="!tvShow.favorite" class="bi bi-bookmark-star-fill text-secondary"
+                    (click)="addToFavorite(tvShow.name)"></i>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteTvShow(tvShow.name)"><i
+                        class="bi bi-trash-fill"></i> Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
